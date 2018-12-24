@@ -5,13 +5,10 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="美团某处上传存在SSRF漏洞, keywords">
-    <meta name="description" content="1、打开Url：http://xxx.com/profile ，然后选择一个图片上传然后抓包发现有如下请求
+    <meta name="keywords" content="一个有趣的思路, keywords">
+    <meta name="description" content="首先，正常打开I春秋页面（https://bbs.ichunqiu.com/portal.php）
 
-然后我猜想这里的处理流程是这样的：
-
-上传文件后返回包返回一个Url
-然后上图那个请求把一部的Url去访问并且使其成为图片地址（应">
+然后手贱一下加上一个alert(1)试试~（https://bbs.ichunqiu.com/portal.php?a=alert(1)）">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>美团某处上传存在SSRF漏洞 | only_free blog</title>
+    <title>一个有趣的思路 | only_free blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -223,13 +220,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        美团某处上传存在SSRF漏洞
+                        一个有趣的思路
                     </div>
                 </div>
             </div>
@@ -366,35 +363,59 @@
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>1、打开Url：<a href="http://xxx.com/profile" target="_blank" rel="noopener">http://xxx.com/profile</a> ，然后选择一个图片上传然后抓包发现有如下请求</p>
-<p><img src="http://static.zybuluo.com/1kbfree/27tbui8q7e9x7ravx8jivzdk/1.png" alt="1.png-220kB"></p>
-<p>然后我猜想这里的处理流程是这样的：</p>
-<ol>
-<li>上传文件后返回包返回一个<code>Url</code></li>
-<li>然后上图那个请求把一部的<code>Url</code>去访问并且使其成为图片地址（应该是读取<code>Url</code>然后把它内容写入~）</li>
-</ol>
-<p>那么以上流程如果<code>Url</code>没有严格过滤的话是会造成<code>SSRF</code>的，但是这里有过滤，但仍可以绕过~</p>
-<pre><code>http://p1.meituan.net.127.0.0.1.xip.io
-</code></pre><p>上面这个<code>url</code>打开等于打开<code>127.0.0.1</code>（<code>ping</code>一下就知道了）</p>
-<p><img src="http://static.zybuluo.com/1kbfree/n4bivtodu7857uam9n5yh55x/1.png" alt="1.png-24.5kB"></p>
-<p>这里去请求一下我的<code>ceye</code>（和<code>dnslog</code>一样的）</p>
-<p><img src="http://static.zybuluo.com/1kbfree/d3m6dlql5t7zg646b6chlcmv/1.png" alt="1.png-232.5kB"></p>
-<p>然后去我的<code>CEYE</code>去看下~</p>
-<p><img src="http://static.zybuluo.com/1kbfree/t1ejl7jg1dimuvvkr8fx0fwb/image.png" alt="image.png-110.8kB"></p>
-<p>可以看到他这里是有去请求的，那么还可以利用<code>CEYE</code>的<code>DNS Rebinding</code>使其去访问一个<code>ip</code>（比较麻烦），所以这里用另一种方法来使其访问随意一个<code>ip</code></p>
-<pre><code>http://p1.meituan.net.183.232.231.172.xip.io/
-</code></pre><p>这里的<code>183.232.231.172</code>是我<code>ping</code>百度的<code>ip</code>，然后我打开一下看看~</p>
-<p><img src="http://static.zybuluo.com/1kbfree/lz0psyxavxnf65hxnnclmgv6/1.png" alt="1.png-32.9kB"></p>
-<p>然后放入请求中是可以正常访问的，如图</p>
-<p><img src="http://static.zybuluo.com/1kbfree/yakvfdjz5uwlo28t22u6545v/1.png" alt="1.png-234.5kB"></p>
-<p>那么再测试一个无法访问的<code>ip</code>试试</p>
-<p><img src="http://static.zybuluo.com/1kbfree/q6qy5t0ntzztbjpmlh6sq0p5/1.png" alt="1.png-254.4kB"></p>
-<p>可以看到返回的是<code>504</code>而且请求时间非常的长~ </p>
-<p>下面探测内网的就不展示了。</p>
-<h3 id="漏洞进展"><a href="#漏洞进展" class="headerlink" title="漏洞进展"></a>漏洞进展</h3><p>评级：中<br>奖金：250</p>
+                <p>首先，正常打开I春秋页面（<code>https://bbs.ichunqiu.com/portal.php</code>）</p>
+<p><img src="http://static.zybuluo.com/1kbfree/nwi21qubl7d9nfk5bsgcmo9n/image_1co8pc6j2lsosoc5deimp119l9.png" alt="image_1co8pc6j2lsosoc5deimp119l9.png-488kB"></p>
+<p>然后手贱一下加上一个<code>alert(1)</code>试试~（<code>https://bbs.ichunqiu.com/portal.php?a=alert(1)</code>）</p>
+<p><img src="http://static.zybuluo.com/1kbfree/6btvax83xx7vsc6lwf4wpbnc/image_1co8pe8r41j8u13va2nqeo4tlsm.png" alt="image_1co8pe8r41j8u13va2nqeo4tlsm.png-80kB"></p>
+<h3 id="尝试利用"><a href="#尝试利用" class="headerlink" title="尝试利用"></a>尝试利用</h3><p>我去=v=。这个<code>WAF</code>（加速乐）很强，这都给拦了，但是作为一个捡漏洞的人来讲，要别人交互的漏洞都是低位和不收的，而且这个是要用户打开链接才可以被拦截，但是等下就会正常显示，那用户点击后发现会显示这个页面不可能再次点击把~，那么就应该想想如何提升危害，然后我发现了有个好玩的~</p>
+<h3 id="构造代码"><a href="#构造代码" class="headerlink" title="构造代码"></a>构造代码</h3><p>首先我在本地尝试一下，创建一个<code>HTML</code>文件，代码是</p>
+<pre class=" language-html"><code class="language-html"><span class="token doctype">&lt;!DOCTYPE html></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>拦截吧（你打不开i春秋了）<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://bbs.ichunqiu.com/portal.php?a<span class="token punctuation">=</span>alert(1)<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span>
+</code></pre>
+<p>然后在浏览器处打开</p>
+<p><img src="http://static.zybuluo.com/1kbfree/o1esq9tp010wd1h1lcfg5djd/image_1co8pnjs3hpu61e2qu178avuq13.png" alt="image_1co8pnjs3hpu61e2qu178avuq13.png-13.8kB"></p>
+<p>然后再尝试打开<code>I春秋</code></p>
+<p><img src="http://static.zybuluo.com/1kbfree/jm5cdg98scgmuh8bruh46a1k/image_1co8ppa5ldmeg3r1b2ria5128h1g.png" alt="image_1co8ppa5ldmeg3r1b2ria5128h1g.png-74.1kB"></p>
+<p>我来解释一下为啥子~因为<code>img</code>标签设置的<code>src</code>属性是<code>https://bbs.ichunqiu.com/portal.php?a=alert(1)</code>，所以打开页面会加载<code>https://bbs.ichunqiu.com/portal.php?a=alert(1)</code>这个<code>URL</code>，然后我们访问这个<code>URL</code>的话会被<code>WAF</code>拦截，导致无法访问<code>I春秋</code></p>
+<h3 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h3><p>我们可以看到<code>I春秋</code>回复处可以加载图片，如下（随便打开一个文章：<code>https://bbs.ichunqiu.com/thread-46084-1-1.html</code>）</p>
+<p><img src="http://static.zybuluo.com/1kbfree/eje7n4yxnwov6cp5zmiuqoif/image_1co8rbua7oeq4qj6kmte5vvm6r.png" alt="image_1co8rbua7oeq4qj6kmte5vvm6r.png-111.5kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/nk77x8b6bu3olh7vd7o2ecx1/image_1co8rd4ln1s3uj5ubud1st01gij78.png" alt="image_1co8rd4ln1s3uj5ubud1st01gij78.png-149.4kB"></p>
+<p>上传的图片是：<code>https://bbs.ichunqiu.com/uc_server/avatar.php?uid=340720&amp;size=middle</code></p>
+<p>那么我想让别人访问这个文章就显示<code>WAF</code>拦截页面如何搞？ 嘿嘿，可以在链接后面加个<code>&amp;a=alert(1)</code>，变成<code>https://bbs.ichunqiu.com/uc_server/avatar.php?uid=340720&amp;size=middle&amp;a=alert(1)</code></p>
 <blockquote>
-<p>因为非核心业务所以给的钱比较少</p>
+<p>注意：先发一条评论然后点击编辑然后插入这段代码</p>
 </blockquote>
+<pre><code>[img=120,120]https://bbs.ichunqiu.com/uc_server/avatar.php?uid=340720&amp;size=middle&amp;a=alert(1)[/img]
+</code></pre><p>如下</p>
+<p><img src="http://static.zybuluo.com/1kbfree/6sq9x8f4w6ntntvxjxqztqvz/image_1co8rja781h0o9q282f11lva7l82.png" alt="image_1co8rja781h0o9q282f11lva7l82.png-103.1kB"></p>
+<p>然后再次访问 <code>https://bbs.ichunqiu.com/thread-46084-1-1.html</code></p>
+<p><img src="http://static.zybuluo.com/1kbfree/v8ky2tc30m99log7jrih4khx/image_1co8rlknh1bi6i131rafr51nbf8f.png" alt="image_1co8rlknh1bi6i131rafr51nbf8f.png-100.1kB"></p>
+<p>可以看到加载了，那么刷新一下~</p>
+<p><img src="http://static.zybuluo.com/1kbfree/uz3q9onxmdllqfac4gpwwmam/image_1co8rm7751lfi16hb10e31151rae8s.png" alt="image_1co8rm7751lfi16hb10e31151rae8s.png-81.3kB"></p>
+<p>那么，我如果想恶意破坏的话，我可以在每个文章那里加上这个代码（评论），导致每个看文章的人无法正常访问I春秋~~</p>
+<h3 id="漏洞案例复现"><a href="#漏洞案例复现" class="headerlink" title="漏洞案例复现"></a>漏洞案例复现</h3><p>利用条件：</p>
+<p>1、退出的Url没有Token等验证<br>2、可以有<code>&lt;img&gt;</code>或者其他加载资源的标签</p>
+<p>首先，知道某网站的退出链接是<code>http://www.xxx.com/exit</code>。</p>
+<p>那么我们可以去找到论坛留言处、头像处、背景图片处将Url设置为<code>http://www.xxx.com/exit</code>，那么当用户每次访问的时候都会退出。如下是一个漏洞案例</p>
+<p>1、打开Url：<a href="http://xxxxxx/forum.php?id=马赛克" target="_blank" rel="noopener">http://xxxxxx/forum.php?id=马赛克</a> （随便找的一个帖子），然后评论一下，并且抓包加入恶意代码，如下</p>
+<p><img src="http://static.zybuluo.com/1kbfree/mzs2zy1p11g46343mj011xre/image_1cqbpd8e23mnkej99cnep1cro9.png" alt=""></p>
+<p>加入的代码是 <code>[img]http://xxxxxx/logout?client_id=1[/img]</code></p>
+<p>2、然后打开帖子</p>
+<p><img src="http://static.zybuluo.com/1kbfree/ls8y940ot3y8lanz0b9v7u7m/image_1cqbpfvh81qrm1lne1tbo1iou16qm.png" alt=""></p>
+<p><img src="http://static.zybuluo.com/1kbfree/vogapad0mu7bdhkmk0zpywab/image_1cqbpif0ptjk1p5d1tqp8slj0j13.png" alt=""></p>
+<p>可以看到已经退出了~</p>
+<p>利用思路</p>
+<p>上面是一个利用思路，但是这个只是评论处的利用，其实还有很多可以，如下几列</p>
+<p>1、可以利用Csrf漏洞结合，把头像、个人背景等img的地址修改为退出url<br>2、利用越权改头像把图片地址改成退出地址，然后其他用户一登录就退出，增加危害~<br>3、有些网站聊天处可以发图片，那么可以发送一个退出Url给他，导致退出（单次的，低危害） </p>
+<h3 id="思路扩展"><a href="#思路扩展" class="headerlink" title="思路扩展"></a>思路扩展</h3><p>1、有个<code>get</code>请求的<code>csrf</code>，但是严格的验证了<code>referer</code>为<code>www.a.com</code>，那么可以在<code>www.a.com</code>中插入一个外链，然后把外链地址改为<code>get</code>请求的<code>csrf</code>地址，就可以绕过。</p>
 
             </div>
             <hr>
@@ -416,7 +437,7 @@
                     <span class="reprint-tip">Reprint please specify: </span>
                     <a href="http://yoursite.com" class="b-link-green">only_free blog</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2018/12/24/mei-tuan-mou-chu-shang-chuan-cun-zai-ssrf-lou-dong/" class="b-link-green">美团某处上传存在SSRF漏洞</a>
+                    <a href="/2018/12/24/yi-ge-you-qu-de-si-lu/" class="b-link-green">一个有趣的思路</a>
                 </p>
             </div>
         </div>
@@ -438,7 +459,7 @@
     <div class="row article-row">
         
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">Previous</div>
+            <div class="article-badge left-badge text-color">Current</div>
             <div class="card">
                 <a href="/2018/12/24/yi-ge-you-qu-de-si-lu/">
                     <div class="card-image">
@@ -454,9 +475,9 @@
 
 然后手贱一下加上一个alert(1)试试~（https://bbs.ichunqiu.com/portal.php?a=alert(1)）</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-24
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-24
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -469,6 +490,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -483,7 +505,7 @@
         
         
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">Current</div>
+            <div class="article-badge right-badge text-color">Next</div>
             <div class="card">
                 <a href="/2018/12/24/mei-tuan-mou-chu-shang-chuan-cun-zai-ssrf-lou-dong/">
                     <div class="card-image">
@@ -517,7 +539,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
