@@ -5,13 +5,12 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="美团某处上传存在SSRF漏洞, keywords">
-    <meta name="description" content="1、打开Url：http://xxx.com/profile ，然后选择一个图片上传然后抓包发现有如下请求
+    <meta name="keywords" content="cookie可控导致的漏洞, keywords">
+    <meta name="description" content="漏洞利用1、打开站点发现他有一个请求是这样的
 
-然后我猜想这里的处理流程是这样的：
-
-上传文件后返回包返回一个Url
-然后上图那个请求把一部的Url去访问并且使其成为图片地址（应">
+你可以操作cookie为任何值，那么好玩的来了~
+首先假设a用户是受害者，然后我（攻击者）诱导a用户打开如下链接
+http://www.xxx.cn/web/index/weiqi?PHPSE">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +18,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>美团某处上传存在SSRF漏洞 | only_free blog</title>
+    <title>cookie可控导致的漏洞 | only_free blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -223,13 +222,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        美团某处上传存在SSRF漏洞
+                        cookie可控导致的漏洞
                     </div>
                 </div>
             </div>
@@ -366,35 +365,17 @@
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>1、打开Url：<a href="http://xxx.com/profile" target="_blank" rel="noopener">http://xxx.com/profile</a> ，然后选择一个图片上传然后抓包发现有如下请求</p>
-<p><img src="http://static.zybuluo.com/1kbfree/27tbui8q7e9x7ravx8jivzdk/1.png" alt="1.png-220kB"></p>
-<p>然后我猜想这里的处理流程是这样的：</p>
-<ol>
-<li>上传文件后返回包返回一个<code>Url</code></li>
-<li>然后上图那个请求把一部的<code>Url</code>去访问并且使其成为图片地址（应该是读取<code>Url</code>然后把它内容写入~）</li>
-</ol>
-<p>那么以上流程如果<code>Url</code>没有严格过滤的话是会造成<code>SSRF</code>的，但是这里有过滤，但仍可以绕过~</p>
-<pre><code>http://p1.meituan.net.127.0.0.1.xip.io
-</code></pre><p>上面这个<code>url</code>打开等于打开<code>127.0.0.1</code>（<code>ping</code>一下就知道了）</p>
-<p><img src="http://static.zybuluo.com/1kbfree/n4bivtodu7857uam9n5yh55x/1.png" alt="1.png-24.5kB"></p>
-<p>这里去请求一下我的<code>ceye</code>（和<code>dnslog</code>一样的）</p>
-<p><img src="http://static.zybuluo.com/1kbfree/d3m6dlql5t7zg646b6chlcmv/1.png" alt="1.png-232.5kB"></p>
-<p>然后去我的<code>CEYE</code>去看下~</p>
-<p><img src="http://static.zybuluo.com/1kbfree/t1ejl7jg1dimuvvkr8fx0fwb/image.png" alt="image.png-110.8kB"></p>
-<p>可以看到他这里是有去请求的，那么还可以利用<code>CEYE</code>的<code>DNS Rebinding</code>使其去访问一个<code>ip</code>（比较麻烦），所以这里用另一种方法来使其访问随意一个<code>ip</code></p>
-<pre><code>http://p1.meituan.net.183.232.231.172.xip.io/
-</code></pre><p>这里的<code>183.232.231.172</code>是我<code>ping</code>百度的<code>ip</code>，然后我打开一下看看~</p>
-<p><img src="http://static.zybuluo.com/1kbfree/lz0psyxavxnf65hxnnclmgv6/1.png" alt="1.png-32.9kB"></p>
-<p>然后放入请求中是可以正常访问的，如图</p>
-<p><img src="http://static.zybuluo.com/1kbfree/yakvfdjz5uwlo28t22u6545v/1.png" alt="1.png-234.5kB"></p>
-<p>那么再测试一个无法访问的<code>ip</code>试试</p>
-<p><img src="http://static.zybuluo.com/1kbfree/q6qy5t0ntzztbjpmlh6sq0p5/1.png" alt="1.png-254.4kB"></p>
-<p>可以看到返回的是<code>504</code>而且请求时间非常的长~ </p>
-<p>下面探测内网的就不展示了。</p>
-<h3 id="漏洞进展"><a href="#漏洞进展" class="headerlink" title="漏洞进展"></a>漏洞进展</h3><p>评级：中<br>奖金：250</p>
-<blockquote>
-<p>因为非核心业务所以给的钱比较少</p>
-</blockquote>
+                <h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>1、打开站点发现他有一个请求是这样的</p>
+<p><img src="http://static.zybuluo.com/1kbfree/dr60uluzbcs2hex6kqt9bf1a/1.png" alt="1.png-200.5kB"></p>
+<p>你可以操作<code>cookie</code>为任何值，那么好玩的来了~</p>
+<p>首先假设<code>a</code>用户是受害者，然后我（攻击者）诱导<code>a</code>用户打开如下链接</p>
+<pre><code>http://www.xxx.cn/web/index/weiqi?PHPSESSID=123321
+</code></pre><p><img src="http://static.zybuluo.com/1kbfree/g4rdm8prblacgiadrd37qy6a/1.png" alt="1.png-155.1kB"></p>
+<p>然后我（攻击者）在本地也打开</p>
+<pre><code>http://www.xxx.cn/web/index/weiqi?PHPSESSID=123321
+</code></pre><p><img src="http://static.zybuluo.com/1kbfree/ar9pro7zt5ppo9zve5d0n6gk/1.png" alt="1.png-200.9kB"></p>
+<p>打开后就登录了，其实原理很简单，就是比如这里的系统是用<code>PHPSESSID</code>来验证用户信息的，但是这里<code>PHPSESSID</code>是可控的，所以攻击者可以把受害者的<code>PHPSESSID</code>修改为任何数，然后把自己的<code>PHPSESSID</code>也修改为受害者一样的值就可以登录他们的账号了，是不是很有意思。</p>
+<h3 id="漏洞利用加深"><a href="#漏洞利用加深" class="headerlink" title="漏洞利用加深"></a>漏洞利用加深</h3><p>有一种方法可以让受害者莫名的中招，就比如<code>www.xxx.com</code>可以插入图片，那么我把图片地址改为<code>http://www.xxx.cn/web/index/weiqi?PHPSESSID=123321</code>（也就是<code>&lt;img src=&#39;http://www.xxx.cn/web/index/weiqi?PHPSESSID=123321&#39;&gt;</code>）然后用户一打开<code>www.xxx.com</code>就会在后台加载这个<code>url</code>然后他的<code>cookie</code>就变成了<code>123321</code>，然后攻击者去修改自己的<code>cookie</code>为<code>123321</code>就可以登录他们的账号了。</p>
 
             </div>
             <hr>
@@ -416,7 +397,7 @@
                     <span class="reprint-tip">Reprint please specify: </span>
                     <a href="http://yoursite.com" class="b-link-green">only_free blog</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2018/12/24/mei-tuan-mou-chu-shang-chuan-cun-zai-ssrf-lou-dong/" class="b-link-green">美团某处上传存在SSRF漏洞</a>
+                    <a href="/2018/12/24/cookie-ke-kong-dao-zhi-de-lou-dong/" class="b-link-green">cookie可控导致的漏洞</a>
                 </p>
             </div>
         </div>
@@ -438,25 +419,27 @@
     <div class="row article-row">
         
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">Previous</div>
+            <div class="article-badge left-badge text-color">Current</div>
             <div class="card">
-                <a href="/2018/12/24/yi-ge-you-qu-de-si-lu/">
+                <a href="/2018/12/24/cookie-ke-kong-dao-zhi-de-lou-dong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="一个有趣的思路">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="cookie可控导致的漏洞">
                         
-                        <span class="card-title">一个有趣的思路</span>
+                        <span class="card-title">cookie可控导致的漏洞</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">首先，正常打开I春秋页面（https://bbs.ichunqiu.com/portal.php）
+                    <div class="summary">漏洞利用1、打开站点发现他有一个请求是这样的
 
-然后手贱一下加上一个alert(1)试试~（https://bbs.ichunqiu.com/portal.php?a=alert(1)）</div>
+你可以操作cookie为任何值，那么好玩的来了~
+首先假设a用户是受害者，然后我（攻击者）诱导a用户打开如下链接
+http://www.xxx.cn/web/index/weiqi?PHPSE</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-24
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-24
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -469,6 +452,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -485,29 +469,29 @@
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">Next</div>
             <div class="card">
-                <a href="/2018/12/23/ce-shi/">
+                <a href="/2018/12/24/gayhub-shang-de-gong-ju-ji-he/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="测试">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="gayhub上的工具集合">
                         
-                        <span class="card-title">测试</span>
+                        <span class="card-title">gayhub上的工具集合</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">介绍这是一个文件上传的靶场（总共19关）
-下载地址：https://github.com/c0ny1/upload-labs
-过程第一关：
-
-可以看到这里的上传的验证是javascript验证的，也就是前台认证，但是我们可以利用后台验证绕过</div>
+                    <div class="summary">项目简介Scanners Box是一个集合github平台上的安全行业从业者自研开源扫描器的仓库，包括子域名枚举、数据库漏洞扫描、弱口令或信息泄漏扫描、端口扫描、指纹识别以及其他大型扫描器或模块化扫描器，同时该仓库只收录各位网友自己编写的一</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-23
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-24
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            only_free
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/转载/" class="post-category" target="_blank">
+                                    转载
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -515,8 +499,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/php/" target="_blank">
-                        <span class="chip bg-color">php</span>
+                    <a href="/tags/工具介绍/" target="_blank">
+                        <span class="chip bg-color">工具介绍</span>
                     </a>
                     
                 </div>

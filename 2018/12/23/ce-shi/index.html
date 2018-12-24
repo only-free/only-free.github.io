@@ -463,41 +463,45 @@
     <div class="row article-row">
         
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">Current</div>
+            <div class="article-badge left-badge text-color">Previous</div>
             <div class="card">
-                <a href="/2018/12/23/ce-shi/">
+                <a href="/2018/12/24/mei-tuan-mou-chu-shang-chuan-cun-zai-ssrf-lou-dong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="测试">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="美团某处上传存在SSRF漏洞">
                         
-                        <span class="card-title">测试</span>
+                        <span class="card-title">美团某处上传存在SSRF漏洞</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">介绍这是一个文件上传的靶场（总共19关）
-下载地址：https://github.com/c0ny1/upload-labs
-过程第一关：
+                    <div class="summary">1、打开Url：http://xxx.com/profile ，然后选择一个图片上传然后抓包发现有如下请求
 
-可以看到这里的上传的验证是javascript验证的，也就是前台认证，但是我们可以利用后台验证绕过</div>
+然后我猜想这里的处理流程是这样的：
+
+上传文件后返回包返回一个Url
+然后上图那个请求把一部的Url去访问并且使其成为图片地址（应</div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-23
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-24
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            only_free
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web安全/" class="post-category" target="_blank">
+                                    Web安全
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/php/" target="_blank">
-                        <span class="chip bg-color">php</span>
+                    <a href="/tags/漏洞案例/" target="_blank">
+                        <span class="chip bg-color">漏洞案例</span>
                     </a>
                     
                 </div>
