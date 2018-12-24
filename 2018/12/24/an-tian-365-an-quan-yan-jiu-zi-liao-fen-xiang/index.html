@@ -5,12 +5,17 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="cookie可控导致的漏洞, keywords">
-    <meta name="description" content="漏洞利用1、打开站点发现他有一个请求是这样的
-
-你可以操作cookie为任何值，那么好玩的来了~
-首先假设a用户是受害者，然后我（攻击者）诱导a用户打开如下链接
-http://www.xxx.cn/web/index/weiqi?PHPSE">
+    <meta name="keywords" content="安天365安全研究资料分享, keywords">
+    <meta name="description" content="第一期阅读地址
+第二期阅读地址
+第三期阅读地址
+第四期阅读地址
+第五期阅读地址
+第六期阅读地址
+第七期阅读地址
+第八期阅读地址
+第九期阅读地址
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +23,7 @@ http://www.xxx.cn/web/index/weiqi?PHPSE">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>cookie可控导致的漏洞 | only_free blog</title>
+    <title>安天365安全研究资料分享 | only_free blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -222,13 +227,13 @@ http://www.xxx.cn/web/index/weiqi?PHPSE">
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        cookie可控导致的漏洞
+                        安天365安全研究资料分享
                     </div>
                 </div>
             </div>
@@ -339,8 +344,8 @@ http://www.xxx.cn/web/index/weiqi?PHPSE">
             
             <div class="article-tag">
                 
-                <a href="/tags/漏洞案例/" target="_blank">
-                    <span class="chip bg-color">漏洞案例</span>
+                <a href="/tags/资料分享/" target="_blank">
+                    <span class="chip bg-color">资料分享</span>
                 </a>
                 
             </div>
@@ -350,8 +355,8 @@ http://www.xxx.cn/web/index/weiqi?PHPSE">
                 <span class="post-cate">
                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                     
-                    <a href="/categories/Web安全/" class="post-category" target="_blank">
-                        Web安全
+                    <a href="/categories/分享/" class="post-category" target="_blank">
+                        分享
                     </a>
                     
                 </span>
@@ -365,17 +370,15 @@ http://www.xxx.cn/web/index/weiqi?PHPSE">
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>1、打开站点发现他有一个请求是这样的</p>
-<p><img src="http://static.zybuluo.com/1kbfree/dr60uluzbcs2hex6kqt9bf1a/1.png" alt="1.png-200.5kB"></p>
-<p>你可以操作<code>cookie</code>为任何值，那么好玩的来了~</p>
-<p>首先假设<code>a</code>用户是受害者，然后我（攻击者）诱导<code>a</code>用户打开如下链接</p>
-<pre><code>http://www.xxx.cn/web/index/weiqi?PHPSESSID=123321
-</code></pre><p><img src="http://static.zybuluo.com/1kbfree/g4rdm8prblacgiadrd37qy6a/1.png" alt="1.png-155.1kB"></p>
-<p>然后我（攻击者）在本地也打开</p>
-<pre><code>http://www.xxx.cn/web/index/weiqi?PHPSESSID=123321
-</code></pre><p><img src="http://static.zybuluo.com/1kbfree/ar9pro7zt5ppo9zve5d0n6gk/1.png" alt="1.png-200.9kB"></p>
-<p>打开后就登录了，其实原理很简单，就是比如这里的系统是用<code>PHPSESSID</code>来验证用户信息的，但是这里<code>PHPSESSID</code>是可控的，所以攻击者可以把受害者的<code>PHPSESSID</code>修改为任何数，然后把自己的<code>PHPSESSID</code>也修改为受害者一样的值就可以登录他们的账号了，是不是很有意思。</p>
-<h3 id="漏洞利用加深"><a href="#漏洞利用加深" class="headerlink" title="漏洞利用加深"></a>漏洞利用加深</h3><p>有一种方法可以让受害者莫名的中招，就比如<code>www.xxx.com</code>可以插入图片，那么我把图片地址改为<code>http://www.xxx.cn/web/index/weiqi?PHPSESSID=123321</code>（也就是<code>&lt;img src=&#39;http://www.xxx.cn/web/index/weiqi?PHPSESSID=123321&#39;&gt;</code>）然后用户一打开<code>www.xxx.com</code>就会在后台加载这个<code>url</code>然后他的<code>cookie</code>就变成了<code>123321</code>，然后攻击者去修改自己的<code>cookie</code>为<code>123321</code>就可以登录他们的账号了。</p>
+                <h3 id="第一期"><a href="#第一期" class="headerlink" title="第一期"></a>第一期</h3><p><a href="http://static.zybuluo.com/1kbfree/9mo8fotfnvksr18aezqbi56o/%E3%80%8A%E5%AE%89%E5%A4%A9365%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E3%80%8B%E7%AC%AC1%E6%9C%9F-2017-04.pdf" target="_blank" rel="noopener">阅读地址</a></p>
+<h3 id="第二期"><a href="#第二期" class="headerlink" title="第二期"></a>第二期</h3><p><a href="http://static.zybuluo.com/1kbfree/9zmznh67hr67q3499vzixdxz/%E3%80%8A%E5%AE%89%E5%A4%A9365%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E3%80%8B%E7%AC%AC2%E6%9C%9F-2017-05.pdf" target="_blank" rel="noopener">阅读地址</a></p>
+<h3 id="第三期"><a href="#第三期" class="headerlink" title="第三期"></a>第三期</h3><p><a href="http://static.zybuluo.com/1kbfree/0acfwlpgdvko40odp216yy6h/%E3%80%8A%E5%AE%89%E5%A4%A9365%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E3%80%8B%E7%AC%AC3%E6%9C%9F-2017-06.pdf" target="_blank" rel="noopener">阅读地址</a></p>
+<h3 id="第四期"><a href="#第四期" class="headerlink" title="第四期"></a>第四期</h3><p><a href="http://static.zybuluo.com/1kbfree/dee75yevf5r7l2huq38y5033/%E3%80%8A%E5%AE%89%E5%A4%A9365%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E3%80%8B%E7%AC%AC4%E6%9C%9F-2017-07.pdf" target="_blank" rel="noopener">阅读地址</a></p>
+<h3 id="第五期"><a href="#第五期" class="headerlink" title="第五期"></a>第五期</h3><p><a href="http://static.zybuluo.com/1kbfree/vfrddr8rgb7d79ncl7k5aj9l/%E3%80%8A%E5%AE%89%E5%A4%A9365%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E3%80%8B%E7%AC%AC5%E6%9C%9F201708.pdf" target="_blank" rel="noopener">阅读地址</a></p>
+<h3 id="第六期"><a href="#第六期" class="headerlink" title="第六期"></a>第六期</h3><p><a href="http://static.zybuluo.com/1kbfree/tnh4nyev4qp2zdu7jqtk8pfs/%E3%80%8A%E5%AE%89%E5%A4%A9365%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E3%80%8B%E7%AC%AC6%E6%9C%9F201709.pdf" target="_blank" rel="noopener">阅读地址</a></p>
+<h3 id="第七期"><a href="#第七期" class="headerlink" title="第七期"></a>第七期</h3><p><a href="http://static.zybuluo.com/1kbfree/g6rh2ih0ynjmi7aldih9syu2/%E3%80%8A%E5%AE%89%E5%A4%A9365%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E3%80%8B%E7%AC%AC7%E6%9C%9F20171028.pdf" target="_blank" rel="noopener">阅读地址</a></p>
+<h3 id="第八期"><a href="#第八期" class="headerlink" title="第八期"></a>第八期</h3><p><a href="http://static.zybuluo.com/1kbfree/fna1eezud966bcnw59iqlvb1/%E3%80%8A%E5%AE%89%E5%A4%A9365%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E3%80%8B%E7%AC%AC8%E6%9C%9F20171128.pdf" target="_blank" rel="noopener">阅读地址</a></p>
+<h3 id="第九期"><a href="#第九期" class="headerlink" title="第九期"></a>第九期</h3><p><a href="http://static.zybuluo.com/1kbfree/3e7bib120fwlu998sxyjvwoh/%E3%80%8A%E5%AE%89%E5%A4%A9365%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E3%80%8B%E7%AC%AC9%E6%9C%9F20171228.pdf" target="_blank" rel="noopener">阅读地址</a></p>
 
             </div>
             <hr>
@@ -397,7 +400,7 @@ http://www.xxx.cn/web/index/weiqi?PHPSE">
                     <span class="reprint-tip">Reprint please specify: </span>
                     <a href="https://only-free.github.io" class="b-link-green">only_free blog</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2018/12/24/cookie-ke-kong-dao-zhi-de-lou-dong/" class="b-link-green">cookie可控导致的漏洞</a>
+                    <a href="/2018/12/24/an-tian-365-an-quan-yan-jiu-zi-liao-fen-xiang/" class="b-link-green">安天365安全研究资料分享</a>
                 </p>
             </div>
         </div>
@@ -419,7 +422,7 @@ http://www.xxx.cn/web/index/weiqi?PHPSE">
     <div class="row article-row">
         
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">Previous</div>
+            <div class="article-badge left-badge text-color">Current</div>
             <div class="card">
                 <a href="/2018/12/24/an-tian-365-an-quan-yan-jiu-zi-liao-fen-xiang/">
                     <div class="card-image">
@@ -442,9 +445,9 @@ http://www.xxx.cn/web/index/weiqi?PHPSE">
 第九期阅读地址
 </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-24
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-24
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -457,6 +460,7 @@ http://www.xxx.cn/web/index/weiqi?PHPSE">
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -473,17 +477,21 @@ http://www.xxx.cn/web/index/weiqi?PHPSE">
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">Next</div>
             <div class="card">
-                <a href="/2018/12/24/gayhub-shang-de-gong-ju-ji-he/">
+                <a href="/2018/12/24/cookie-ke-kong-dao-zhi-de-lou-dong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="gayhub上的工具集合">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="cookie可控导致的漏洞">
                         
-                        <span class="card-title">gayhub上的工具集合</span>
+                        <span class="card-title">cookie可控导致的漏洞</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">项目简介Scanners Box是一个集合github平台上的安全行业从业者自研开源扫描器的仓库，包括子域名枚举、数据库漏洞扫描、弱口令或信息泄漏扫描、端口扫描、指纹识别以及其他大型扫描器或模块化扫描器，同时该仓库只收录各位网友自己编写的一</div>
+                    <div class="summary">漏洞利用1、打开站点发现他有一个请求是这样的
+
+你可以操作cookie为任何值，那么好玩的来了~
+首先假设a用户是受害者，然后我（攻击者）诱导a用户打开如下链接
+http://www.xxx.cn/web/index/weiqi?PHPSE</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-24
@@ -492,8 +500,8 @@ http://www.xxx.cn/web/index/weiqi?PHPSE">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/转载/" class="post-category" target="_blank">
-                                    转载
+                            <a href="/categories/Web安全/" class="post-category" target="_blank">
+                                    Web安全
                                 </a>
                             
                             
@@ -503,8 +511,8 @@ http://www.xxx.cn/web/index/weiqi?PHPSE">
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/工具介绍/" target="_blank">
-                        <span class="chip bg-color">工具介绍</span>
+                    <a href="/tags/漏洞案例/" target="_blank">
+                        <span class="chip bg-color">漏洞案例</span>
                     </a>
                     
                 </div>

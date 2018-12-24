@@ -5,8 +5,8 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Categories, keywords">
-    <meta name="description" content="Categories | only_free blog">
+    <meta name="keywords" content="Tag: 资料分享, keywords">
+    <meta name="description" content="Tag: 资料分享 | only_free blog">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Categories | only_free blog</title>
+    <title>Tag: 资料分享 | only_free blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -233,110 +233,108 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
 
     
 
-<div id="category-cloud" class="container chip-container">
+<div id="tags" class="container chip-container">
     <div class="card">
         <div class="card-content">
-            <div class="tag-title center-align">Post Categories</div>
+            <div class="tag-title center-align">Post Tags</div>
             <div class="tag-chips">
                 
                 
-                
-                <a href="/categories/转载/" title="转载: 2">
+                <a href="/tags/工具介绍/" title="工具介绍: 2">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default " style="background-color: #F9EBEA;">转载
+                             chip-default " data-tagname="工具介绍" style="background-color: #F9EBEA;">工具介绍
                         <span class="tag-length">2</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/总结/" title="总结: 1">
+                <a href="/tags/绕WAF/" title="绕WAF: 1">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default " style="background-color: #F5EEF8;">总结
+                             chip-default " data-tagname="绕WAF" style="background-color: #F5EEF8;">绕WAF
                         <span class="tag-length">1</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/Web安全/" title="Web安全: 5">
+                <a href="/tags/漏洞案例/" title="漏洞案例: 4">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default " style="background-color: #D5F5E3;">Web安全
-                        <span class="tag-length">5</span>
+                             chip-default " data-tagname="漏洞案例" style="background-color: #D5F5E3;">漏洞案例
+                        <span class="tag-length">4</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/分享/" title="分享: 1">
+                <a href="/tags/php/" title="php: 1">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default " style="background-color: #E8F8F5;">分享
+                             chip-default " data-tagname="php" style="background-color: #E8F8F5;">php
                         <span class="tag-length">1</span>
                     </span>
                 </a>
                 
+                
+                <a href="/tags/资料分享/" title="资料分享: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-active " data-tagname="资料分享" style="background-color: #FEF9E7;">资料分享
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/漏洞思路/" title="漏洞思路: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " data-tagname="漏洞思路" style="background-color: #F8F9F9;">漏洞思路
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
                 
             </div>
         </div>
     </div>
 </div>
 
-    
-    <style type="text/css">
-    #category-radar {
-        width: 100%;
-        height: 360px;
-    }
-</style>
+    <div class="container">
+        
 
-<div class="container" data-aos="fade-up">
-    <div class="card">
-        <div id="category-radar" class="card-content"></div>
+        <article>
+            <div class="row tags-posts">
+                
+                
+                <div class="article tag-post col s12 m6 l4" data-tags="资料分享" data-aos="fade-up">
+                    <div class="card">
+                        <a href="/2018/12/24/an-tian-365-an-quan-yan-jiu-zi-liao-fen-xiang/">
+                            <div class="card-image tag-image">
+                                
+                                
+                                <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="安天365安全研究资料分享">
+                                
+                                <span class="card-title">安天365安全研究资料分享</span>
+                            </div>
+                        </a>
+                        <div class="card-content article-content">
+                            <div class="publish-info">
+                                <span class="publish-date">
+                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-24
+                                </span>
+                                <span class="publish-author">
+                                    
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                    <a href="/categories/分享/" class="post-category" target="_blank">
+                                    分享
+                                    </a>
+                                    
+                                    
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </article>
     </div>
-</div>
-
-<script type="text/javascript" src="/libs/echarts/echarts.min.js"></script>
-<script type="text/javascript">
-    let radarChart = echarts.init(document.getElementById('category-radar'));
-
-    
-
-    let option = {
-        title: {
-            left: 'center',
-            text: 'Post Categories Radar Chart',
-            textStyle: {
-                fontWeight: 500,
-                fontSize: 22
-            }
-        },
-        tooltip: {},
-        radar: {
-            name: {
-                textStyle: {
-                    color: '#3C4858'
-                }
-            },
-            indicator: [{"name":"转载","max":6},{"name":"总结","max":6},{"name":"Web安全","max":6},{"name":"分享","max":6}],
-            nameGap: 5,
-            center: ['50%','55%'],
-            radius: '66%'
-        },
-        series: [{
-            type: 'radar',
-            color: ['#3ecf8e'],
-            itemStyle: {normal: {areaStyle: {type: 'default'}}},
-            data : [
-                {
-                    value : [2,1,5,1],
-                    name : 'Number of Categories'
-                }
-            ]
-        }]
-    };
-
-    radarChart.setOption(option);
-</script>
-    
-
 </main>
+
 
 <footer class="page-footer bg-color">
     <div class="container row center-align">
