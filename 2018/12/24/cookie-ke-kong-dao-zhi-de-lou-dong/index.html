@@ -423,6 +423,28 @@ http://www.xxx.cn/web/index/weiqi?PHPSE">
     </div>
 
     
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'adbd3d6aad0dea7f65f6',
+        clientSecret: '86d35ed0d14ccfe574521de6bd8aab7f9bed6dfd',
+        repo: '',
+        owner: '',
+        admin: null,
+        id: '2018-12-24T19-59-28',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
 
     
 
